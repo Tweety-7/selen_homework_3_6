@@ -1,6 +1,8 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+import time
+
 
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default="chrome",
@@ -28,6 +30,7 @@ def browser(request):
         browser = webdriver.Firefox(firefox_profile=fp)
     else:
         raise pytest.UsageError("--browser_name should be chrome or firefox")
+    browser.implicitly_wait(5)
     yield browser
     print("\nquit browser..")
     browser.quit()

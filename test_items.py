@@ -10,11 +10,16 @@ http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/.
 
 pytest --language=es test_items.py
 """
-
+import time
 link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
 
 def test_btn_have(browser):
 	browser.get(link)
-	btn = browser.find_element_by_class_name("btn.btn-lg.btn-primary.btn-add-to-basket")
-	btn.click()
+	# time.sleep(30)
+	#поиск кнопки дообавить в корзину
+	btn = browser.find_element_by_class_name("btn.btn-lg.btn-primary.btn-add-to-basket")	
+	btn.click() #тык на кнтпку для появления алертов(или не совсем алертов - 
+	# переключиться на них невозможно)
+	alerts = browser.find_elements_by_class_name("alertinner")
+	assert "Coders at Work" in alerts[0].text
 	
